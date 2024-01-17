@@ -1,0 +1,4 @@
+Host bee-control-plane
+  HostName ${CONTROL_PLANE_HOST}
+  User ${HOST_USER}
+  IdentityFile ~/.ssh/id_rsa_home
