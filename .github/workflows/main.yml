@@ -51,6 +51,8 @@ jobs:
         tags: tag:ci
 
     - name: Run the Docker image
+      env:
+        CONTROL_PLANE_HOST: ${{ secrets.CONTROL_PLANE_HOST }}
       run: |
         docker run --rm \
           -v ${{ github.workspace }}/ansible:/ansible \
