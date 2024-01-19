@@ -29,6 +29,7 @@ jobs:
       with:
         playbook: playbook.yaml
         directory: ./ansible
+        key: ${{secrets.SSH_KEY}}
         configuration: |
           [defaults]
           callbacks_enabled = ansible.posix.profile_tasks, ansible.posix.timer
