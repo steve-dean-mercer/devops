@@ -39,6 +39,14 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v2
 
+    # - name: Run the Docker image
+    #   run: |
+    #     docker run --rm slipmatsteve/ansible-docker:latest
+
     - name: Run the Docker image
       run: |
-        docker run --rm slipmatsteve/ansible-docker:latest
+        docker run --rm \
+          -v ${{ github.workspace }}:/ansible \
+          -v ${{ secrets.SSH_KEY }}:/root/.ssh/id_rsa_home \
+          -v ${{ github.workspace }}/ansible.cfg:/ansible/ansible.cfg \
+          slipmatsteve/ansible-docker:latest ansible-playbook -i inventory.ini playbook.yaml
