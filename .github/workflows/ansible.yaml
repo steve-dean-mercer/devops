@@ -14,8 +14,7 @@ jobs:
     - name: Run playbook
       uses: dawidd6/action-ansible-playbook@v2
       with:
-        playbook: playbook.yaml
-        directory: /ansible
+        playbook: ansible/playbook.yaml
         configuration: |
           [defaults]
           callbacks_enabled = ansible.posix.profile_tasks, ansible.posix.timer
