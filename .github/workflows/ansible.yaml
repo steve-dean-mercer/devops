@@ -1,0 +1,43 @@
+name: Run Ansible Playbook
+
+on:
+  push:
+    branches:
+      - main
+      - actions
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: List directory contents
+      run: ls -la
+
+    - name: Tailscale
+      uses: tailscale/github-action@v2
+      with:
+        oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+        oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+        tags: tag:ci
+
+    - name: Run playbook
+      uses: dawidd6/action-ansible-playbook@v2
+      with:
+        playbook: playbook.yaml
+        directory: ./ansible
+        key: ${{secrets.SSH_KEY}}
+        configuration: |
+          [defaults]
+          callbacks_enabled = ansible.posix.profile_tasks, ansible.posix.timer
+          stdout_callback = yaml
+          nocows = false
+          host_key_checking = False
+          remote_user = ${{ secrets.SSH_USER }}
+        inventory: |
+          [all]
+          ${{ secrets.CONTROL_PLANE_HOST }}
+        vault_password: ${{ secrets.VAULT_PASSWORD }}
