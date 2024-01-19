@@ -11,6 +11,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    # - name: Run the Docker image
+    #   run: |
+    #     docker run --rm slipmatsteve/ansible-docker:latest
+
+    - name: Tailscale
+      uses: tailscale/github-action@v2
+      with:
+        oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+        oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+        tags: tag:ci
+
     - name: Run playbook
       uses: dawidd6/action-ansible-playbook@v2
       with:
