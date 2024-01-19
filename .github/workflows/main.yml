@@ -50,6 +50,11 @@ jobs:
         oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
         tags: tag:ci
 
+    - name: Print CONTROL_PLANE_HOST
+      env:
+        CONTROL_PLANE_HOST: ${{ secrets.CONTROL_PLANE_HOST }}
+      run: echo "CONTROL_PLANE_HOST is $CONTROL_PLANE_HOST"
+
     - name: Run the Docker image
       env:
         CONTROL_PLANE_HOST: ${{ secrets.CONTROL_PLANE_HOST }}
