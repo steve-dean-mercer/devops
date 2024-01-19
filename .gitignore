@@ -1,0 +1,5 @@
+# .gitignore
+
+# Ignore secrets file
+.secrets
+.config

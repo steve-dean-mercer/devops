@@ -2,8 +2,6 @@
 - name: Test Connectivity to My Server
   hosts: control-plane
   become: true
-  vars:
-    ansible_become_pass: ${HOST_PASSWORD}
   tasks:
     - name: Ping the server
       ansible.builtin.ping:
