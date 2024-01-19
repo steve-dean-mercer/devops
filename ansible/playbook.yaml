@@ -1,6 +1,8 @@
 ---
 - name: Test Connectivity to My Server
   hosts: control-plane
+  vars_files:
+    - vars.yaml
   become: true
   tasks:
     - name: Ping the server
