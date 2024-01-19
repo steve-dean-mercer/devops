@@ -14,9 +14,8 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v2
 
-    # - name: Run the Docker image
-    #   run: |
-    #     docker run --rm slipmatsteve/ansible-docker:latest
+    - name: List directory contents
+      run: ls -la
 
     - name: Tailscale
       uses: tailscale/github-action@v2
