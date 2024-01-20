@@ -4,10 +4,10 @@ on:
   push:
     branches:
       - main
-      - actions
+      - ansible-2
 
 jobs:
-  build:
+  ping:
     runs-on: ubuntu-latest
 
     steps:
@@ -27,7 +27,7 @@ jobs:
     - name: Run playbook
       uses: dawidd6/action-ansible-playbook@v2
       with:
-        playbook: playbook.yaml
+        playbook: ping.yaml
         directory: ./ansible
         key: ${{secrets.SSH_KEY}}
         configuration: |
