@@ -24,7 +24,7 @@ jobs:
         oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
         tags: tag:ci
 
-    - name: Run playbook
+    - name: ping-test
       uses: dawidd6/action-ansible-playbook@v2
       with:
         playbook: ping.yaml
@@ -42,7 +42,7 @@ jobs:
           ${{ secrets.CONTROL_PLANE_HOST }}
         vault_password: ${{ secrets.VAULT_PASSWORD }}
 
-    - name: Run playbook
+    - name: install-python
       uses: dawidd6/action-ansible-playbook@v2
       with:
         playbook: python.yaml
