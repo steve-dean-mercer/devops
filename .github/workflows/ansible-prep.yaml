@@ -41,3 +41,21 @@ jobs:
           [all]
           ${{ secrets.CONTROL_PLANE_HOST }}
         vault_password: ${{ secrets.VAULT_PASSWORD }}
+
+    - name: Run playbook
+      uses: dawidd6/action-ansible-playbook@v2
+      with:
+        playbook: python.yaml
+        directory: ./ansible
+        key: ${{secrets.SSH_KEY}}
+        configuration: |
+          [defaults]
+          callbacks_enabled = ansible.posix.profile_tasks, ansible.posix.timer
+          stdout_callback = yaml
+          nocows = false
+          host_key_checking = False
+          remote_user = ${{ secrets.SSH_USER }}
+        inventory: |
+          [all]
+          ${{ secrets.CONTROL_PLANE_HOST }}
+        vault_password: ${{ secrets.VAULT_PASSWORD }}
