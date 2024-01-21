@@ -3,7 +3,7 @@
   hosts: control_plane
   become: yes
   vars:
-    kubernetes_version: "1.29.0-00"
+    kubernetes_version: "1.29.1"
 
   tasks:
     - name: Check current kubeadm version
