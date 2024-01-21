@@ -6,6 +6,12 @@
     kubernetes_version: "1.29.1"
 
   tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+  tasks:
     - name: Check current kubeadm version
       command: kubeadm version -o short
       register: current_kubeadm_version
