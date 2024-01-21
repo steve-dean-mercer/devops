@@ -1,0 +1,58 @@
+---
+- name: Install k8s
+  hosts: control_plane
+  become: yes
+  vars:
+    kubernetes_version: "1.29.0-00"
+
+  tasks:
+    - name: Check current kubeadm version
+      command: kubeadm version -o short
+      register: current_kubeadm_version
+      changed_when: false
+      ignore_errors: true
+
+    - name: Install kubeadm 
+      block:
+        - name: Update all packages
+          apt:
+            update_cache: yes
+
+        - name: Install transport-https and software-properties-common
+          apt:
+            name:
+              - apt-transport-https
+              - software-properties-common
+            state: present
+
+        - name: Add Kubernetes signing key
+          ansible.builtin.apt_key:
+            url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+            state: present
+
+        - name: Add Kubernetes repository
+          ansible.builtin.apt_repository:
+            repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
+            state: present
+            filename: kubernetes
+
+        - name: Install specific version of kubeadm
+          apt:
+            name: "kubeadm={{ kubernetes_version }}"
+            state: present
+            update_cache: yes
+
+        - name: Hold kubeadm at the specified version
+          apt:
+            name: kubeadm
+            state: hold
+      when: current_kubeadm_version.stdout is not search(kubernetes_version)
+
+    - name: Verify kubeadm installation
+      command: kubeadm version -o short
+      register: kubeadm_version
+      changed_when: false
+
+    - name: Show kubeadm version
+      debug:
+        var: kubeadm_version.stdout_lines
