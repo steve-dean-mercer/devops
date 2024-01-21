@@ -36,7 +36,7 @@
             state: present
             filename: kubernetes
 
-        - name: Install specific version of kubeadm
+        - name: Install kubeadm
           apt:
             name: "kubeadm={{ kubernetes_version }}"
             state: present
