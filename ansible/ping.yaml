@@ -1,6 +1,6 @@
 ---
 - name: Test Connectivity to My Server
-  hosts: control-plane
+  hosts: all
   vars_files:
     - vars.yaml
   become: true

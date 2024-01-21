@@ -1,0 +1,41 @@
+name: Run Kubeadm Ansible Playbook
+
+on:
+  workflow_dispatch:
+    inputs:
+      playbook:
+        description: 'install kubeadm'
+        required: true
+        default: 'install-kubeadm.yml'
+
+jobs:
+  run-kubeadm-playbook:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Tailscale
+        uses: tailscale/github-action@v2
+        with:
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+          tags: tag:ci
+
+      - name: Run kubeadm Ansible playbook
+        uses: dawidd6/action-ansible-playbook@v2
+        with:
+          playbook: install-kubeadm.yml
+          directory: ./ansible
+          key: ${{ secrets.SSH_KEY }}
+          configuration: |
+            [defaults]
+            callbacks_enabled = ansible.posix.profile_tasks, ansible.posix.timer
+            stdout_callback = yaml
+            nocows = false
+            host_key_checking = False
+            remote_user = ${{ secrets.SSH_USER }}
+          inventory: |
+            [control_plane]
+            ${{ secrets.CONTROL_PLANE_HOST }}
+          vault_password: ${{ secrets.VAULT_PASSWORD }}
