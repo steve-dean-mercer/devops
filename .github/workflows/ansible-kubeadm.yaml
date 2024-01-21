@@ -1,7 +1,16 @@
 name: Run Kubeadm Ansible Playbook
 
 on:
+  push:
+    branches:
+      - main
+      - ansible-2
   workflow_dispatch:
+    inputs:
+      playbook:
+        description: 'install kubeadm'
+        required: true
+        default: 'install-kubeadm.yml'
 
 jobs:
   run-kubeadm-playbook:
