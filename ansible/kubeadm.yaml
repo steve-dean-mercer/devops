@@ -11,6 +11,47 @@
         update_cache: yes
         cache_valid_time: 3600
 
+    - name: Disable swap
+      command: swapoff -a
+      ignore_errors: true
+
+    - name: Remove swap from /etc/fstab
+      lineinfile:
+        path: /etc/fstab
+        regexp: '^(\s*[^#\s]+\s+swap\s+\S+\s+\S+\s*)$'
+        line: '#\1'
+        backrefs: yes
+
+    - name: Install container runtime (containerd)
+      block:
+        - name: Install containerd
+          apt:
+            name: containerd
+            state: present
+            update_cache: yes
+
+        - name: Create containerd configuration file
+          command: containerd config default | tee /etc/containerd/config.toml
+          args:
+            creates: /etc/containerd/config.toml
+
+        - name: Restart and enable containerd
+          systemd:
+            name: containerd
+            state: restarted
+            enabled: yes
+
+    - name: Set sysctl parameters for Kubernetes networking
+      sysctl:
+        name: "{{ item.name }}"
+        value: "{{ item.value }}"
+        state: present
+        reload: yes
+      loop:
+        - { name: 'net.bridge.bridge-nf-call-iptables', value: '1' }
+        - { name: 'net.ipv4.ip_forward', value: '1' }
+      when: ansible_os_family == "Debian"
+
   tasks:
     - name: Check current kubeadm version
       command: kubeadm version -o short
@@ -49,9 +90,9 @@
             update_cache: yes
 
         - name: Hold kubeadm at the specified version
-          apt:
+          ansible.builtin.dpkg_selections:
             name: kubeadm
-            state: hold
+            selection: hold
       when: current_kubeadm_version.stdout is not search(kubernetes_version)
 
     - name: Verify kubeadm installation
