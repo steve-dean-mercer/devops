@@ -6,7 +6,7 @@ on:
       playbook:
         description: 'install kubeadm'
         required: true
-        default: 'install-kubeadm.yaml'
+        default: 'kubeadm.yaml'
 
 jobs:
   run-kubeadm-playbook:
@@ -25,7 +25,7 @@ jobs:
       - name: Run kubeadm Ansible playbook
         uses: dawidd6/action-ansible-playbook@v2
         with:
-          playbook: install-kubeadm.yaml
+          playbook: kubeadm.yaml
           directory: ./ansible
           key: ${{ secrets.SSH_KEY }}
           configuration: |
