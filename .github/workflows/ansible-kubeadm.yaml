@@ -1,10 +1,6 @@
 name: Run Kubeadm Ansible Playbook
 
 on:
-  push:
-    branches:
-      - main
-      - ansible-2
   workflow_dispatch:
     inputs:
       playbook:
