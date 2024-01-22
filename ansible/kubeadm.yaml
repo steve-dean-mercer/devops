@@ -41,6 +41,11 @@
             state: restarted
             enabled: yes
 
+    - name: Load br_netfilter module
+      modprobe:
+        name: br_netfilter
+        state: present
+
     - name: Set sysctl parameters for Kubernetes networking
       sysctl:
         name: "{{ item.name }}"
