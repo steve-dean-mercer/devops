@@ -4,7 +4,7 @@
   become: yes
 
   tasks:
-  
+
     - name: Reset kubeadm
       command: kubeadm reset --force
       ignore_errors: true
@@ -22,6 +22,11 @@
         enabled: no
       vars:
         container_runtime_service: containerd
+
+    - name: Unhold kubeadm, kubectl, and kubelet packages
+      ansible.builtin.shell: 
+        cmd: apt-mark unhold kubeadm kubectl kubelet
+      become: yes
 
     - name: Uninstall Kubernetes packages
       apt:
