@@ -1,12 +1,12 @@
-name: Run Kubeadm Ansible Playbook
+name: Run Remove Kubeadm Ansible Playbook
 
 on:
   workflow_dispatch:
     inputs:
       playbook:
-        description: 'install kubeadm'
+        description: 'remove kubeadm'
         required: true
-        default: 'kubeadm.yaml'
+        default: 'remove-kubeadm.yaml'
 
 jobs:
   run-kubeadm-playbook:
@@ -22,10 +22,10 @@ jobs:
           oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
           tags: tag:ci
 
-      - name: Run kubeadm Ansible playbook
+      - name: Run Remove kubeadm Ansible playbook
         uses: dawidd6/action-ansible-playbook@v2
         with:
-          playbook: kubeadm.yaml
+          playbook: remove-kubeadm.yaml
           directory: ./ansible
           key: ${{ secrets.SSH_KEY }}
           configuration: |

@@ -1,0 +1,55 @@
+---
+- name: Uninstall Kubernetes
+  hosts: all
+  become: yes
+
+  tasks:
+  
+    - name: Reset kubeadm
+      command: kubeadm reset --force
+      ignore_errors: true
+
+    - name: Stop kubelet
+      systemd:
+        name: kubelet
+        state: stopped
+        enabled: no
+
+    - name: Stop container runtime
+      systemd:
+        name: "{{ container_runtime_service }}"
+        state: stopped
+        enabled: no
+      vars:
+        container_runtime_service: containerd
+
+    - name: Uninstall Kubernetes packages
+      apt:
+        name:
+          - kubeadm
+          - kubelet
+          - kubectl
+          - docker.io
+          - containerd
+        state: absent
+        purge: yes
+        autoremove: yes
+
+    - name: Remove Kubernetes configuration and data files
+      file:
+        path: "{{ item }}"
+        state: absent
+      loop:
+        - ~/.kube
+        - /etc/kubernetes
+        - /var/lib/kubelet
+        - /var/lib/etcd
+        - /etc/cni
+        - /var/lib/cni
+
+    - name: Remove network interfaces created by Kubernetes
+      command: ip link delete {{ item }}
+      loop:
+        - cni0
+        - flannel.1
+      ignore_errors: true
