@@ -40,6 +40,7 @@ jobs:
         inventory: |
           [all]
           ${{ secrets.CONTROL_PLANE_HOST }}
+          ${{ secrets.WORKER_HOST }}
         vault_password: ${{ secrets.VAULT_PASSWORD }}
 
     - name: install-python
