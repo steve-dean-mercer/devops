@@ -39,8 +39,8 @@ jobs:
           remote_user = ${{ secrets.SSH_USER }}
         inventory: |
           [all]
-          control-plane ansible_host=100.89.165.82
-          worker-1      ansible_host=100.91.103.102
+          ${{ secrets.CONTROL_PLANE_HOST }}
+          ${{ secrets.WORKER_HOST }}
         vault_password: ${{ secrets.VAULT_PASSWORD }}
 
     - name: install-python
