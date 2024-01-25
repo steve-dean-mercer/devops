@@ -40,6 +40,7 @@ jobs:
         inventory: |
           [all]
           control-plane ansible_host=100.89.165.82
+          worker-1      ansible_host=100.91.103.102
         vault_password: ${{ secrets.VAULT_PASSWORD }}
 
     - name: install-python
