@@ -111,14 +111,15 @@
             - kubelet
             - kubeadm
             - kubectl
+
+        - name: restart containerd
+          systemd:
+            name: containerd
+            state: restarted
+            enabled: yes
+
       when: kubeadm_check.rc != 0
 
   handlers:
     - name: reload sysctl
       command: sysctl --system
-
-    - name: restart containerd
-      systemd:
-        name: containerd
-        state: restarted
-        enabled: yes
