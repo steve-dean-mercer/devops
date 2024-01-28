@@ -77,12 +77,17 @@
           notify:
             - restart containerd
 
-        - name: Configure Containerd
-          blockinfile:
+        - name: Generate default containerd configuration
+          command: containerd config default
+          args:
+            creates: /etc/containerd/config.toml
+
+        - name: Set SystemdCgroup to true in containerd config
+          lineinfile:
             path: /etc/containerd/config.toml
-            block: |
-              [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
-              SystemdCgroup = true
+            regexp: 'SystemdCgroup = false'
+            line: '        SystemdCgroup = true'
+            backrefs: yes
 
         - name: Import Kubernetes GPG key
           apt_key:
