@@ -13,6 +13,8 @@ spec:
     targetRevision: 'v6.0.8'
     helm:
       parameters:
+        - name: metricsScraper.enabled
+          value: "true"
   destination:
     namespace: kubernetes-dashboard
     name: in-cluster
