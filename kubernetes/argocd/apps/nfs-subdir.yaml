@@ -15,7 +15,7 @@ spec:
       parameters:
         - name: nfs.server
           value: '192.168.0.110'
-        - name: '/nfs-storage'
+        - name: '/mnt/my_external_1'
           value: "2Gi"
   destination:
     namespace: nfs-subdir-external-provisioner
