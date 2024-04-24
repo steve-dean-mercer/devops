@@ -20,10 +20,15 @@ spec:
         extraVolumeMounts:
           - name: plex-storage
             mountPath: /data/plex
+          - name: plex-music-storage
+            mountPath: /data/plex-music
         extraVolumes:
           - name: plex-storage
             persistentVolumeClaim:
               claimName: plex-pvc
+          - name: plex-music-storage
+            persistentVolumeClaim:
+              claimName: plex-music-pvc
   destination:
     namespace: plex
     name: in-cluster

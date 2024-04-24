@@ -4,10 +4,21 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: plex-pvc
+  namespace: plex
 spec:
   storageClassName: second-nfs-subdir-external-provisioner
   accessModes: [ReadWriteOnce]
   resources: { requests: { storage: 2Ti } }
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: plex-music-pvc
+  namespace: plex
+spec:
+  storageClassName: second-nfs-subdir-external-provisioner
+  accessModes: [ReadWriteOnce]
+  resources: { requests: { storage: 500Gi } }
 # ---
 # apiVersion: v1
 # kind: Pod
