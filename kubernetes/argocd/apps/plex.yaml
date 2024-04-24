@@ -12,20 +12,18 @@ spec:
     chart: plex-media-server
     targetRevision: 'v0.3.0'
     helm:
-      parameters:
-        - name: pms.storageClassName
-          value: "longhorn"
-        - name: pms.configStorage
-          value: "2Gi"
-        - name: extraVolumeMounts
-          value: |
-            - name: plex-storage
-              mountPath: /data/plex
-        - name: extraVolumes
-          value: |
-            - name: plex-storage
-              persistentVolumeClaim:
-                claimName: plex-pvc
+      valuesObject:
+        pms:
+          storageClassName: "longhorn"
+          configStorage: "2Gi"
+          pvcName: "plex-pvc"
+        extraVolumeMounts:
+          - name: plex-storage
+            mountPath: /data/plex
+        extraVolumes:
+          - name: plex-storage
+            persistentVolumeClaim:
+              claimName: plex-pvc
   destination:
     namespace: plex
     name: in-cluster
