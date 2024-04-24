@@ -17,6 +17,15 @@ spec:
           value: "longhorn"
         - name: pms.configStorage
           value: "2Gi"
+        - name: extraVolumeMounts
+          value: |
+            - name: plex-storage
+              mountPath: /data/plex
+        - name: extraVolumes
+          value: |
+            - name: plex-storage
+              persistentVolumeClaim:
+                claimName: plex-pvc
   destination:
     namespace: plex
     name: in-cluster
