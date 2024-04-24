@@ -13,7 +13,7 @@ spec:
     targetRevision: 'v4.0.18'
     helm:
       parameters:
-        - name: nfs.server-1
+        - name: nfs.server
           value: '192.168.0.110'
         - name: '/mnt/my_external_1'
           value: "500Gi"
