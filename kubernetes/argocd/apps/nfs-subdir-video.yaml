@@ -20,7 +20,7 @@ spec:
         - name: storageClass.name
           value: 'nfs-client-2'
         - name: storageClass.name
-          value: 'k8s-sigs.io/second-nfs-subdir-external-provisioner'
+          value: 'second-nfs-subdir-external-provisioner'
   destination:
     namespace: nfs-subdir-external-provisioner
     name: in-cluster
