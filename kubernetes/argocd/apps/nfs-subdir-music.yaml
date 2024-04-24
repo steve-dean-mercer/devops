@@ -13,10 +13,10 @@ spec:
     targetRevision: 'v4.0.18'
     helm:
       parameters:
-        - name: nfs.server
+        - name: nfs.server-1
           value: '192.168.0.110'
         - name: '/mnt/my_external_1'
-          value: "2Gi"
+          value: "500Gi"
   destination:
     namespace: nfs-subdir-external-provisioner
     name: in-cluster
