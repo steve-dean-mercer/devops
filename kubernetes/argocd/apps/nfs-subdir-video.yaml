@@ -25,3 +25,6 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
+storageClass:
+  name: nfs-client-2
+  provisionerName: k8s-sigs.io/second-nfs-subdir-external-provisioner
