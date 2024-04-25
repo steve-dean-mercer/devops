@@ -16,7 +16,7 @@ metadata:
   name: plex-music-pvc
   namespace: plex
 spec:
-  storageClassName: second-nfs-subdir-external-provisioner
+  storageClassName: nfs-client
   accessModes: [ReadWriteOnce]
   resources: { requests: { storage: 500Gi } }
 # ---
