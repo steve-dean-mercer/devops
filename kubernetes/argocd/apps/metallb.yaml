@@ -11,14 +11,14 @@ spec:
     repoURL: https://metallb.github.io/metallb
     chart: metallb
     targetRevision: 'v0.14.5'
-    helm:
-      valuesObject:
-        configInline:
-          address-pools:
-          - name: default
-            protocol: layer2
-            addresses:
-            - 192.168.0.50-192.168.0.70
+    # helm:
+    #   valuesObject:
+    #     configInline:
+    #       address-pools:
+    #       - name: default
+    #         protocol: layer2
+    #         addresses:
+    #         - 192.168.0.50-192.168.0.70
   destination:
     namespace: metallb-system
     name: in-cluster
