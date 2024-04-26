@@ -16,7 +16,7 @@ spec:
         pms:
           storageClassName: "longhorn"
           configStorage: "4Gi"
-          pvcName: "plex-pvc"
+          pvcName: "plex-pvc-2"
         extraVolumeMounts:
           - name: plex-storage
             mountPath: /data/plex
