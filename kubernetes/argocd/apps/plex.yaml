@@ -15,7 +15,7 @@ spec:
       valuesObject:
         pms:
           storageClassName: "longhorn"
-          configStorage: "2Gi"
+          configStorage: "4Gi"
           pvcName: "plex-pvc"
         extraVolumeMounts:
           - name: plex-storage
