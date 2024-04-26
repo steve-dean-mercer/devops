@@ -14,9 +14,9 @@ spec:
     helm:
       valuesObject:
         pms:
-          storageClassName: "longhorn"
+          storageClassName: "nfs-client"
           configStorage: "4Gi"
-          pvcName: "plex-pvc-2"
+          pvcName: "plex-pvc"
         extraVolumeMounts:
           - name: plex-storage
             mountPath: /data/plex
