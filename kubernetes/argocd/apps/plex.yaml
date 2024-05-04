@@ -20,12 +20,12 @@ spec:
         extraVolumeMounts:
           - name: plex-storage
             mountPath: /data/plex
-          - name: plex-music-storage
+          - name: plex-music-storage-2
             mountPath: /data/plex-music
         extraVolumes:
           - name: plex-storage
             persistentVolumeClaim:
-              claimName: plex-pvc
+              claimName: plex-pvc-2
           - name: plex-music-storage
             persistentVolumeClaim:
               claimName: plex-music-pvc
