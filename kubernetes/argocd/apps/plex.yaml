@@ -14,7 +14,7 @@ spec:
     helm:
       valuesObject:
         pms:
-          storageClassName: "nfs-client"
+          storageClassName: "longhorn"
           configStorage: "4Gi"
           pvcName: "plex-pvc"
         extraVolumeMounts:
