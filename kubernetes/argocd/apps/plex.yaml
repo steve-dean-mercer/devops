@@ -1,39 +1,39 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: plex
-  namespace: argocd
-  finalizers:
-  - resources-finalizer.argocd.argoproj.io
-spec:
-  project: default
-  source:
-    repoURL: https://raw.githubusercontent.com/plexinc/pms-docker/gh-pages
-    chart: plex-media-server
-    targetRevision: 'v0.3.0'
-    helm:
-      valuesObject:
-        pms:
-          storageClassName: "longhorn"
-          configStorage: "4Gi"
-          pvcName: "plex-pvc"
-        extraVolumeMounts:
-          - name: plex-storage
-            mountPath: /data/plex
-          - name: plex-music-storage
-            mountPath: /data/plex-music
-        extraVolumes:
-          - name: plex-storage
-            persistentVolumeClaim:
-              claimName: plex-pvc-2
-          - name: plex-music-storage
-            persistentVolumeClaim:
-              claimName: plex-music-pvc-2
-  destination:
-    namespace: plex
-    name: in-cluster
-  syncPolicy:
-    automated: {}
-    syncOptions:
-      - CreateNamespace=true
-      - ServerSideApply=true
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: plex
+#   namespace: argocd
+#   finalizers:
+#   - resources-finalizer.argocd.argoproj.io
+# spec:
+#   project: default
+#   source:
+#     repoURL: https://raw.githubusercontent.com/plexinc/pms-docker/gh-pages
+#     chart: plex-media-server
+#     targetRevision: 'v0.3.0'
+#     helm:
+#       valuesObject:
+#         pms:
+#           storageClassName: "longhorn"
+#           configStorage: "4Gi"
+#           pvcName: "plex-pvc"
+#         extraVolumeMounts:
+#           - name: plex-storage
+#             mountPath: /data/plex
+#           - name: plex-music-storage
+#             mountPath: /data/plex-music
+#         extraVolumes:
+#           - name: plex-storage
+#             persistentVolumeClaim:
+#               claimName: plex-pvc-2
+#           - name: plex-music-storage
+#             persistentVolumeClaim:
+#               claimName: plex-music-pvc-2
+#   destination:
+#     namespace: plex
+#     name: in-cluster
+#   syncPolicy:
+#     automated: {}
+#     syncOptions:
+#       - CreateNamespace=true
+#       - ServerSideApply=true
