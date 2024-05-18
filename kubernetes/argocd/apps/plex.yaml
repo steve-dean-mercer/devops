@@ -17,7 +17,7 @@ spec:
           storageClassName: "longhorn"
           configStorage: "4Gi"
         extraVolumeMounts:
-          - name: plex-storagels
+          - name: plex-storage
             mountPath: /data/plex
         extraVolumes:
           - name: plex-storage
