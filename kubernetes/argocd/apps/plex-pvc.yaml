@@ -1,14 +1,14 @@
-# # pod-with-pvc.yaml
-# ---
-# apiVersion: v1
-# kind: PersistentVolumeClaim
-# metadata:
-#   name: plex-pvc
-#   namespace: plex
-# spec:
-#   storageClassName: nfs-client
-#   accessModes: [ReadWriteOnce]
-#   resources: { requests: { storage: 3Ti } }
+# pod-with-pvc.yaml
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: plex-pvc
+  namespace: plex
+spec:
+  storageClassName: nfs-client
+  accessModes: [ReadWriteOnce]
+  resources: { requests: { storage: 3Ti } }
 # # ---
 # apiVersion: v1
 # kind: PersistentVolumeClaim
