@@ -14,11 +14,17 @@ spec:
     helm:
       valuesObject:
        persistence:
-         downloads:
+        config:
+          enabled: true
+          retain: true
+          storageClass: "longhorn"
+          accessMode: ReadWriteOnce
+          size: 1Gi
+        downloads:
           enabled: false
           mountPath: /downloads
           storageClass: "nfs-client"
-          accessMode: ReadWriteOnce
+          accessMode: ReadWriteMany
           size: 100Gi
   destination:
     namespace: plex
