@@ -21,7 +21,7 @@ spec:
           accessMode: ReadWriteOnce
           size: 1Gi
         downloads:
-          enabled: false
+          enabled: true
           mountPath: /downloads
           storageClass: "nfs-client"
           accessMode: ReadWriteMany
