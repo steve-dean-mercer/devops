@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://helm.releases.hashicorp.com
     chart: hashicorp/vault
-    targetRevision: 'v0.28.0'
+    targetRevision: '0.28.0'
     helm:
       valuesObject:
         server:
