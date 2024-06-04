@@ -15,7 +15,7 @@ spec:
       valuesObject:
         pms:
           storageClassName: "longhorn"
-          configStorage: "4Gi"
+          configStorage: "5Gi"
         extraVolumeMounts:
           - name: plex-storage
             mountPath: /data/plex

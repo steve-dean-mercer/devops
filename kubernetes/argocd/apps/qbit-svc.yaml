@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: qbittorrent-svc
+  namespace: plex
+spec:
+  selector:
+    app.kubernetes.io/name: qbittorrent
+  ports:                      
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+  type: LoadBalancer
+  loadBalancerIP: 192.168.0.53
