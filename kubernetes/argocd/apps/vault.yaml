@@ -8,8 +8,8 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://helm.releases.hashicorp.com/hashicorp
-    chart: vault
+    repoURL: https://helm.releases.hashicorp.com
+    chart: hashicorp/vault
     targetRevision: 'v0.28.0'
     helm:
       valuesObject:
