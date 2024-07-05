@@ -13,6 +13,8 @@ spec:
     targetRevision: 'v0.3.0'
     helm:
       valuesObject:
+        nodeSelector:
+          function: plex
         pms:
           storageClassName: "longhorn"
           configStorage: "5Gi"
